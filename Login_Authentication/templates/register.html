@@ -1,0 +1,59 @@
+{%extends 'base.html'%}
+
+
+
+{%block start%}
+
+<div class = 'row mt-5'>
+  <div class = 'col-md-6 offset-md-3'>
+    <div class ='card'>
+      <div class="card-body">
+        <h2 class="card-title text-center">Welcome To Registration Page!</h2>
+
+    <form  method = 'post' enctype="multipart/form-data">
+      {%csrf_token%}  
+      
+      
+        {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">First Name</label>
+            <input type="text" class="form-control" name="first_name" required id="exampleInputEmail1" aria-describedby="emailHelp">
+            
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Last Name</label>
+            <input type="text" class="form-control" name = 'last_name' required id="exampleInputEmail1" aria-describedby="emailHelp">
+            
+        </div>
+        
+        
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Username</label>
+          <input type="text" class="form-control" name="username" required id="exampleInputEmail1" aria-describedby="emailHelp">
+          
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Email</label>
+          <input type="email" class="form-control" name = 'email_address' required id="exampleInputPassword1">
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Phone number</label>
+            <input type="text" class="form-control" name = 'phone_number' required id="exampleInputPassword1">
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" name = 'password' required id="exampleInputPassword1">
+        </div>
+        <p> Already have an account? <a href='/login/'>Login</a></p>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      </div>
+    </div>
+    </div>
+    </div>
+      {%endblock%}
