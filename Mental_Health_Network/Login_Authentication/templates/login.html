@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+
+
+{%block start%}
+  <div class = 'row mt-5'>
+    <div class = 'col-md-6 offset-md-3'>
+      <div class ='card'>
+        <div class="card-body">
+          <h2 class="card-title text-center">Welcome To Login Page!</h2>
+          
+        <form method = 'post' enctype="multipart/form-data"  action="{% url 'login_page' %}">
+          {%csrf_token%}
+          {% if user.is_authenticated %}
+          
+          <a href = '/home/'></a>
+          
+          
+          {%endif%}
+      
+          
+          
+          {% if messages %}
+            <div class="alert alert-info" role="alert">
+              {% for message in messages %}
+                {{message}}
+                {% endfor %}
+              </div>
+            {% endif %}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Username</label>
+          <input type="text" class="form-control", name="username" id="exampleInputEmail1" aria-describedby="emailHelp">
+          
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control", name="password" id="exampleInputPassword1">
+        </div>
+        
+          
+          
+        <p> Forgot Password? <a href='/forgot_pass/'>Click Here</a></p>
+        <p> Don't have an account? <a href='/register/'>Register</a></p>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      
+    </div>
+  </div>
+</div>
+</div>
+{%endblock%}
