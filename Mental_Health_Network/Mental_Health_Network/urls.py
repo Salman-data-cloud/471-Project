@@ -29,7 +29,9 @@ urlpatterns = [
     path('logout/', logout_user, name = 'logout_user'),
     path('forgot_pass/',forgot_password, name='forgot_password'),
     path('home/', home, name = 'home'),
-    path('profile/', include('user_profile.urls'))
+    path('profile/', include('user_profile.urls')),
+    path('support_app/' support_app, name = 'support_app'),
+    path('support_detail/', support_detail, name = 'support_detail') 
 ]
 urlpatterns = urlpatterns+static(settings.MEDIA_URL,
                                  document_root=settings.MEDIA_ROOT)
