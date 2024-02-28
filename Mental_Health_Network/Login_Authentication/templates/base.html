@@ -9,8 +9,18 @@
 
     <style>
         body {
-            padding-top: 56px; /* Adjust based on your navbar height */
+            padding-top: 56px; 
         }
+
+
+        @media (max-width: 576px) {
+            body {
+                padding-top: 70px; 
+            }
+        }
+
+        
+
     </style>
 
     {% block head %}
@@ -19,9 +29,18 @@
 <body>
     <div class="container">
         {% include 'header.html' %}
-        {% if request.path != '/logout/' and request.path != '/register/' %}
-            <a href="/logout/">Logout</a>
-        {% endif %}
+
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            {% if request.path != '/logout/' and request.path != '/register/' %}
+                <a class="nav-link" href="/logout/">Logout</a>
+            {% endif %}
+        </div>
+
         {% block content %}{% endblock %}
     </div>
 
@@ -31,4 +50,5 @@
     {% endblock %}
 </body>
 </html>
+
 
