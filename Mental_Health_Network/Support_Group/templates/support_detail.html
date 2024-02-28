@@ -1,4 +1,9 @@
 {%extends 'base.html'%}
 {%block start%}
 
-<h3>{{}}</h3>
+<h3>{{support_group.group_name}}</h3>
+<ul>
+  {%for i in messages%}
+  <li>{{i.user}}:{{i.message}}</li>
+  {%endfor%}
+</ul>
