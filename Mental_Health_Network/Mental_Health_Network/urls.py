@@ -30,8 +30,10 @@ urlpatterns = [
     path('forgot_pass/',forgot_password, name='forgot_password'),
     path('home/', home, name = 'home'),
     path('profile/', include('user_profile.urls')),
-    path('support_app/' support_app, name = 'support_app'),
-    path('support_detail/', support_detail, name = 'support_detail') 
+    path('support_app/', support_app , name = 'support_app'),
+    path('support_detail/<int:group_id>/', support_detail, name = 'support_detail'),
+    path('user_greeting/', user_greeting, name = 'user_greeting'),
+    path('send_message/<int:group_id>/', send_message, name='send_message'),
 ]
 urlpatterns = urlpatterns+static(settings.MEDIA_URL,
                                  document_root=settings.MEDIA_ROOT)

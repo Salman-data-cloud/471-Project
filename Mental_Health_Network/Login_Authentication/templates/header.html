@@ -10,12 +10,12 @@
                 <span class="icon-bar"></span>
             </button>
             
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated and request.resolver_match.url_name != 'login_page' %}
                 <a class="navbar-brand" href="/">
                     <i class="fa fa-comments"></i> Home
                 </a>
-            {% else %}
-                <a class="navbar-brand" href="/login/">
+            {% elif request.resolver_match.url_name != 'login_page' %}
+                <a class="navbar-brand" href="{% url 'login_page' %}">
                     <i class="fa fa-comments"></i> Login
                 </a>
             {% endif %}
@@ -31,7 +31,7 @@
                         </a>
                     </li>
                     
-                    {% if request.path == '/' %}
+                    {% if request.resolver_match.url_name == 'home' or request.path == '/' %}
                         <li>
                             <a href="{% url 'logout_user' %}">
                                 <i class="fa fa-sign-out" aria-hidden="true"></i>
@@ -40,14 +40,18 @@
                         </li>
                     {% endif %}
                 {% else %}
-                    <li>
-                        <a href="{% url 'login_page' %}">
-                            <i class="fa fa-sign-in" aria-hidden="true"></i>
-                            Log In
-                        </a>
-                    </li>
+                    {% if request.resolver_match.url_name != 'login_page' %}
+                        <li>
+                            <a href="{% url 'login_page' %}">
+                                <i class="fa fa-sign-in" aria-hidden="true"></i>
+                                Log In
+                            </a>
+                        </li>
+                    {% endif %}
                 {% endif %}
             </ul>
         </div>
     </div>
 </nav>
+
+
