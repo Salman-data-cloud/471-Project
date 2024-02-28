@@ -2,7 +2,9 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth import get_user_model
 User = get_user_model()
 from .models import *
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def support_app(request):
     context = {'page': 'Home'}
     data = [
@@ -14,6 +16,7 @@ def support_app(request):
     ]
     return render(request, 'support_group_list.html', context={'page': 'Home', 'data': data})
 
+@login_required
 def support_detail(request, group_id):
     support_group = get_object_or_404(SupportGroup, id=group_id)
     messages = Message.objects.filter(support_group=support_group)
