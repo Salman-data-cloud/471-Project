@@ -1,19 +1,23 @@
 {% extends 'base.html' %}
-{% block start %}
-<div class="container">
-    <h1 class="mt-3 mb-4">{{ support_group.group_name }} Support Group</h1>
 
-    <div class="chat-container">
-        <div class="chat-messages">
-            {% for message in messages %}
-                <p>{{ message.sender.username }}: {{ message.text }}</p>
-            {% endfor %}
-        </div>
-        <form method="post" action="{% url 'send_message' group_id=group_id %}">
-            {% csrf_token %}
-            <textarea name="message" placeholder="Type your message..."></textarea>
-            <button type="submit" class="btn btn-primary">Send</button>
-        </form>
-    </div>
-</div>
+{% block content %}
+  <h1>{{ group.name }}</h1>
+  <h2>Messages</h2>
+  <ul>
+    {% for message in messages %}
+      <li>{{ message.message }}</li>
+      <p>Time: {{ message.time }}</p>  <!-- Displaying the time of sending -->
+      <p>Sender: {{ message.user.username }}</p>  <!-- Displaying the sender's username -->
+      <hr>
+    {% empty %}
+      <p>No messages yet.</p>
+    {% endfor %}
+  </ul>
+  
+  <form method="post" action="{% url 'send_message' group_id=group_id %}">
+    {% csrf_token %}
+    <textarea name="message" rows="4" cols="50"></textarea><br>
+    <input type="submit" value="Send">
+  </form>
 {% endblock %}
+

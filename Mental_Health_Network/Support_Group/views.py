@@ -37,12 +37,29 @@ def send_message(request, group_id):
         
         if text:
             Message.objects.create(
-                sender=request.user,
+                user=request.user,
                 support_group=support_group,
-                text= text
+                message = text
             )
 
     return redirect('support_detail', group_id=group_id)
 
+@login_required
+def message_view(request):
+    messages = Message.objects.all().order_by('-time')
+    return render(request, 'message_view.html',{'messages':messages})
 
+@login_required
+def reply_message(request, message_id):
+    if request.method == 'POST':
+        arrived_text = get_object_or_404(Message, id = message_id)
+        replied_text = request.POST.get('reply', '')
+        if replied_text:
+            Message.objects.create(
+                user = request.user,
+                support_group = arrived_text.support_group,
+                message = replied_text
+            )
+
+    return redirect('message_view')
 

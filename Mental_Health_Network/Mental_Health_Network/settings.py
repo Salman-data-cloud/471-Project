@@ -44,6 +44,8 @@ EXTERNAL_APPS = [
     'django_otp',
     'django_otp.plugins.otp_totp',
     'Support_Group',
+    'Find_Doctor',
+    'event_manager',
     
     
 

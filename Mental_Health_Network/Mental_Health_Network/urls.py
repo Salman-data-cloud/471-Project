@@ -21,6 +21,11 @@ from Support_Group.views import *
 from user_profile import views
 from django.conf import settings
 from django.conf.urls.static import static
+from Find_Doctor.views import *
+from event_manager.views import *
+from Support_Group.views import reply_message
+from event_manager.views import join_event
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -34,6 +39,11 @@ urlpatterns = [
     path('support_detail/<int:group_id>/', support_detail, name = 'support_detail'),
     path('user_greeting/', user_greeting, name = 'user_greeting'),
     path('send_message/<int:group_id>/', send_message, name='send_message'),
+    path('doctor_directory/', doctor_directory, name = 'doctor_directory' ),
+    path('message_view/', message_view, name = 'message_view'),
+    path('reply_message/<int:message_id>/', reply_message, name = 'reply_message'),
+    path('events/', events, name = 'events'),
+    path('join_event/', join_event, name = 'join_event')
 ]
 urlpatterns = urlpatterns+static(settings.MEDIA_URL,
                                  document_root=settings.MEDIA_ROOT)
