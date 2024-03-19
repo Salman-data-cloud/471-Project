@@ -1,0 +1,53 @@
+/* Common Styles */
+.main {
+    margin: 10px;
+}
+.section {
+    margin-bottom: 10px;
+}
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.grid {
+    display: flex;
+    flex-direction: column; /* Change to column */
+    gap: 20px;
+}
+.col {
+    background-color: #80d9eb;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    max-width: 850px; /* Adjust the max-width */
+    width: 100%; 
+}
+.content {
+    margin-bottom: 10px;
+}
+.heading {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.paragraph {
+    margin-bottom: 10px;
+}
+
+/* Back Button */
+.back-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}

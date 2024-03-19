@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seminars and Conferences</title>
+    {% load static%}
+    <link rel="stylesheet" href="{% static 'seminar.css' %}">
+    
+</head>
+<body>
+    <div class="main">
+        <div class="section">
+            <a href="{% url 'upcoming_events' %}" class="back-button">Back</a>
+            <h1 class="title">Seminars and Conferences</h1>
+            <div class="grid">
+                {% for seminar in seminars %}
+                <div class="col">
+                    <div class="content">
+                        <h2 class="heading">{{ seminar.title }}</h2>
+                        <p class="paragraph"><strong>Date:</strong> {{ seminar.date }}</p>
+                        <p class="paragraph"><strong>Time:</strong> {{ seminar.time }}</p>
+                        <p class="paragraph"><strong>Location:</strong> {{ seminar.location }}</p>
+                        <p class="paragraph"><strong>Organizer:</strong> {{ seminar.organizer }}</p>
+                        <p class="paragraph">{{ seminar.description }}</p>
+                        <p><a href="{{ seminar.details_url }}" class="details-link">Know more about the event</a></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

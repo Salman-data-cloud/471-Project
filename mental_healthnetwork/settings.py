@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-EXTERNAL_Apps =['resources']
+EXTERNAL_Apps =['resources','EmergencySupport','events']
 
 INSTALLED_APPS+=EXTERNAL_Apps
 
@@ -122,7 +122,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+
 
 
 

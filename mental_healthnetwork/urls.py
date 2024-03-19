@@ -20,14 +20,23 @@ from resources.views  import*
 from django.conf.urls.static import static
 from django.conf import settings
 
+from EmergencySupport.views import*
+from events.views import upcoming_events, seminars, workshops
+
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('resources-page/', resources, name='resources')
-
+    path('resources-page/', resources, name='resources'),
+    path('emergency-support/',EmergencySupport,name='emergencysupport'),
+    path('upcoming-events/', upcoming_events, name='upcoming_events'),
+    path('seminars/', seminars, name='seminars'),
+    path('workshops/', workshops, name='workshops')
+  
 ]
 
+## for managing the media 
 urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
 
