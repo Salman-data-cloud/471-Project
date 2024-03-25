@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ group.name }}</h1>
+  <h2>Messages</h2>
+  <ul>
+    {% for message in messages %}
+      <li>{{ message.message }}</li>
+      <p>Time: {{ message.time }}</p>  <!-- Displaying the time of sending -->
+      <p>Sender: {{ message.user.username }}</p>  <!-- Displaying the sender's username -->
+      <hr>
+    {% empty %}
+      <p>No messages yet.</p>
+    {% endfor %}
+  </ul>
+  
+  <form method="post" action="{% url 'send_message' group_id=group_id %}">
+    {% csrf_token %}
+    <textarea name="message" rows="4" cols="50"></textarea><br>
+    <input type="submit" value="Send">
+  </form>
+{% endblock %}
+
