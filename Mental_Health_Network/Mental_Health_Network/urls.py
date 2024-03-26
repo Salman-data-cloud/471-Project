@@ -18,13 +18,15 @@ from django.contrib import admin
 from django.urls import path, include
 from Login_Authentication.views import *
 from Support_Group.views import *
-from user_profile import views
+from user_profile.views import *
 from django.conf import settings
 from django.conf.urls.static import static
 from Find_Doctor.views import *
 from event_manager.views import *
 from Support_Group.views import reply_message
 from event_manager.views import join_event
+from payments.views import *
+#from . import views
 
 
 urlpatterns = [
@@ -43,7 +45,12 @@ urlpatterns = [
     path('message_view/', message_view, name = 'message_view'),
     path('reply_message/<int:message_id>/', reply_message, name = 'reply_message'),
     path('events/', events, name = 'events'),
-    path('join_event/', join_event, name = 'join_event')
+    path('join_event/', join_event, name = 'join_event'),
+    path('payments_page/', payment_page, name='payments_page'),
+    path('process_payment/', process_payment, name='process_payment'),
+    path('otp-verification/', otp_verification, name='otp_verification'),
+    path('success_page/', process_payment, name = 'success_page')
 ]
+
 urlpatterns = urlpatterns+static(settings.MEDIA_URL,
                                  document_root=settings.MEDIA_ROOT)

@@ -46,6 +46,7 @@ EXTERNAL_APPS = [
     'Support_Group',
     'Find_Doctor',
     'event_manager',
+    'payments',
     
     
 
