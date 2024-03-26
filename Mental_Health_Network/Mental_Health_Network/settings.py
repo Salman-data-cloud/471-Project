@@ -37,9 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "user_profile"
-]
-EXTERNAL_APPS = [
+    "user_profile",
     'Login_Authentication',
     'django_otp',
     'django_otp.plugins.otp_totp',
@@ -48,11 +46,8 @@ EXTERNAL_APPS = [
     'event_manager',
     'payments',
     
-    
-
 ]
 
-INSTALLED_APPS+= EXTERNAL_APPS
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",

@@ -49,7 +49,8 @@ urlpatterns = [
     path('payments_page/', payment_page, name='payments_page'),
     path('process_payment/', process_payment, name='process_payment'),
     path('otp-verification/', otp_verification, name='otp_verification'),
-    path('success_page/', process_payment, name = 'success_page')
+    path('success_page/', process_payment, name = 'success_page'),
+    path('generate_invoice/', generate_invoice, name= 'generate_invoice'),
 ]
 
 urlpatterns = urlpatterns+static(settings.MEDIA_URL,
