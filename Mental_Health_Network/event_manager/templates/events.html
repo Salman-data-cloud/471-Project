@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{%block start%}
+{% block title %}
+    Upcoming Events - My Website
+{% endblock %}
+
+
+
+{% block events %}
+    <h2>Upcoming Events</h2>
+    {% if events %}
+        <ul>
+            {% for event in events %}
+                <li>
+                    <h3>{{ event.event_name }}</h3>
+                    <p>Date: {{ event.event_date }}</p>
+                    <p>Venue: {{ event.venue }}</p>
+                    <p>Details: {{ event.event_details }}</p>
+                    <form action = "{%url 'join_event'%}" method = 'post'>
+                        {%csrf_token%}
+                        <input type="hidden" name="event_id" value="{{ event.id }}">
+                        <button type = 'submit'>Join Event</button>
+                    </form>
+                </li>
+            {% endfor %}
+            
+        </ul>
+    {% else %}
+        <p>No upcoming events at the moment.</p>
+    {% endif %}
+{% endblock %}
+
+{%endblock%}

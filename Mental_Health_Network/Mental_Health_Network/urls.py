@@ -18,9 +18,16 @@ from django.contrib import admin
 from django.urls import path, include
 from Login_Authentication.views import *
 from Support_Group.views import *
-from user_profile import views
+from user_profile.views import *
 from django.conf import settings
 from django.conf.urls.static import static
+from Find_Doctor.views import *
+from event_manager.views import *
+from Support_Group.views import reply_message
+from event_manager.views import join_event
+from payments.views import *
+#from . import views
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -29,7 +36,21 @@ urlpatterns = [
     path('logout/', logout_user, name = 'logout_user'),
     path('forgot_pass/',forgot_password, name='forgot_password'),
     path('home/', home, name = 'home'),
-    path('profile/', include('user_profile.urls'))
+    path('profile/', include('user_profile.urls')),
+    path('support_app/', support_app , name = 'support_app'),
+    path('support_detail/<int:group_id>/', support_detail, name = 'support_detail'),
+    path('user_greeting/', user_greeting, name = 'user_greeting'),
+    path('send_message/<int:group_id>/', send_message, name='send_message'),
+    path('doctor_directory/', doctor_directory, name = 'doctor_directory' ),
+    path('message_view/', message_view, name = 'message_view'),
+    path('reply_message/<int:message_id>/', reply_message, name = 'reply_message'),
+    path('events/', events, name = 'events'),
+    path('join_event/', join_event, name = 'join_event'),
+    path('payments_page/', payment_page, name='payments_page'),
+    path('process_payment/', process_payment, name='process_payment'),
+    path('otp-verification/', otp_verification, name='otp_verification'),
+    path('success_page/', process_payment, name = 'success_page'),
+    path('generate_invoice/', generate_invoice, name= 'generate_invoice'),
 ]
 
 urlpatterns = urlpatterns+static(settings.MEDIA_URL,
