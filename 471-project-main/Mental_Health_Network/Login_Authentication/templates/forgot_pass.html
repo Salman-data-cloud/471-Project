@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+{%block start%}
+<form method = 'post' enctype="multipart/form-data">
+    {%csrf_token%}
+    <p> Enter your email address </p>
+    <hr>
+    {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Email</label>
+        <input type="email" class="form-control" name = 'email_address' required id="exampleInputPassword1">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+{%endblock%}

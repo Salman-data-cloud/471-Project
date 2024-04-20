@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    height: 20vh;
+}
+
+.text {
+    margin-top: 50px;
+    margin-bottom: 0;
+    font-size: 40px;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.paragraph{
+    padding-top: 50px;
+    padding-left: 60px;
+    padding-right: 30px;
+
+    font-size: 13px;
+
+}
+
+.button{
+    padding-top: 20px;
+    padding-left: 60px;
+
+}
+
+.small-text{
+    color: #b1b1b1;
+}
+

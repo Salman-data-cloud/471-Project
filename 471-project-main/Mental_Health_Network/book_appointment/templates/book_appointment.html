@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Book Appointment</h1>
+<form method="POST" id="appointment_form">
+    {% csrf_token %}
+    
+    <label for="appointment_date">Appointment Date:</label>
+    <input type="date" id="appointment_date" name="appointment_date">
+    <label for="appointment_time">Appointment Time:</label>
+    <input type="time" id="appointment_time" name="appointment_time">
+    <button type="submit">Book Appointment</button>
+</form>
+{% if error_message %}
+    <p>{{ error_message }}</p>
+{% endif %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let form = document.getElementById("appointment_form");
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            // Submit form data via AJAX
+            fetch("{% url 'book_appointment' %}", {
+                method: "POST",
+                body: new FormData(form)
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log("Form submission successful");
+                    // Redirect to the success page
+                    window.location.href = "{% url 'payments_page' %}";
+                } else {
+                    console.error("Form submission failed with status:", response.status);
+                    // Handle errors here
+                }
+            })
+            .catch(error => {
+                console.error("Error occurred:", error);
+            });
+        });
+    });
+</script>
+{%endblock%}

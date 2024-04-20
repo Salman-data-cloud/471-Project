@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Visitor Messages</h1>
+  <ul>
+    {% for message in messages %}
+      <li>{{ message.message }}</li>
+      <p>Time: {{ message.time }}</p>
+      {% if message.user == request.user %}
+        <p>Sender: Representative</p>
+        <p>To: {{ message.support_group.userprofile_set.first.user.username }}</p>  <!-- Get the visitor name -->
+      {% else %}
+        <p>Sender: {{ message.user.username }}</p>
+        <p>To: Representative</p>
+      {% endif %}
+      <hr>
+      <!-- Add a form for employees to reply to the message -->
+      <form method="post" action="{% url 'reply_message' message.id %}">
+        {% csrf_token %}
+        <textarea name="reply" rows="4" cols="50"></textarea><br>
+        <input type="submit" value="Reply">
+      </form>
+      
+      <!-- Display the reply message if available -->
+      {% if message.reply %}
+        <p><strong>Reply:</strong> {{ message.reply }}</p>
+      {% endif %}
+    {% empty %}
+      <p>No messages from visitors.</p>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
