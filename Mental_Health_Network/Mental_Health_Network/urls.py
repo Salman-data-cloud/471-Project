@@ -26,7 +26,7 @@ from event_manager.views import *
 from Support_Group.views import reply_message
 from event_manager.views import join_event
 from payments.views import *
-#from . import views
+from resources.views import *
 
 
 urlpatterns = [
@@ -51,6 +51,7 @@ urlpatterns = [
     path('otp-verification/', otp_verification, name='otp_verification'),
     path('success_page/', process_payment, name = 'success_page'),
     path('generate_invoice/', generate_invoice, name= 'generate_invoice'),
+    path('verify_pass/', verify_otp, name = 'verify_pass'),
 ]
 
 urlpatterns = urlpatterns+static(settings.MEDIA_URL,

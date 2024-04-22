@@ -8,13 +8,16 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
-from django.utils.http import urlsafe_base64_encode
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
-from django_otp.plugins.otp_totp.models import TOTPDevice
+
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
 # Create your views here.
-
+from django.core.mail import send_mail
+from django.conf import settings
+import string
+import random 
 @login_required(login_url='/login/')
 
 def home(request):
@@ -86,31 +89,50 @@ def register(request):
     
     return render(request, 'register.html')
 
-def generate_otp():
-    return str(random.randint(1000,9999))
 
-def send_otp(user,otp):
-    subject = 'Password Reset Code'
-    message = f'Your password reset OTP is: {otp}'
-    sender = 'md.salman.pasha@g.bracu.ac.bd'
-    receiver = user.email_address
-    send_mail(subject,message,sender,receiver)
+def generate_otp():
+    # Generate a 6-digit random OTP
+    return ''.join([str(random.randint(0, 9)) for _ in range(6)])
 
 def forgot_password(request):
     if request.method == 'POST':
-        email_address = request.POST.get('email_address')
-        user = UserLoginAuth.objects.get(email_address = email_address)
-        if user.DoesNotExist:
-            messages.error(request, 'User does not exist with this email.')
-            return redirect('/forgot_pass')
+        email = request.POST.get('email')
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            
+            return render(request, 'forgot_password.html', {'error_message': 'User with this email does not exist'})
         
-        otp =generate_otp()
-        user.otp_code = otp
-        user.save()
-
-        send_otp(user,otp)
         
-        messages.info(request, 'Kindly check your inbox for one-time password. Check the spam folder if not in inbox.')
+        otp = generate_otp()
 
-    return render(request, 'forgot_pass.html')    
+        
+        request.session['password_reset_otp'] = otp
+        request.session['password_reset_email'] = email
 
+        # Send OTP via email
+        email_subject = 'Password Reset OTP'
+        email_message = f'Hi {user.username},\n\nYour OTP for password reset is: {otp}'
+        sender_email = settings.EMAIL_HOST_USER
+        send_mail(email_subject, email_message, sender_email, [email])
+
+        return render(request, 'verify_otp.html')
+    
+    return render(request, 'forgot_password.html')
+
+def verify_otp(request):
+    if request.method == 'POST':
+        entered_otp = request.POST.get('otp')
+        stored_otp = request.session.get('password_reset_otp')
+        if entered_otp == stored_otp:
+            # OTP is correct, allow the user to reset their password
+            email = request.session.get('password_reset_email')
+            del request.session['password_reset_otp']  # Clear OTP from session
+            del request.session['password_reset_email']  # Clear email from session
+            return render(request, 'reset_password.html', {'email': email})
+        else:
+            # OTP is incorrect, display error message
+            messages.error(request, 'Invalid OTP. Please try again.')
+            return redirect('forgot_password')
+
+    return render(request, 'verify_otp.html')
