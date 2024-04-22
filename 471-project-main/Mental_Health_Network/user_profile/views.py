@@ -4,29 +4,10 @@ from .models import Profile
 from django.core.mail import send_mail
 from django.conf import settings
 from django.shortcuts import redirect
-from django.contrib.auth.decorators import login_required
-from .forms import ProfileForm
-
 # Create your views here.
-
-@login_required
 def profile(request):
-    try:
-        user_profile = Profile.objects.get(user=request.user)
-    except Profile.DoesNotExist:
-        user_profile = None
-    
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=user_profile)
-        if form.is_valid():
-            profile = form.save(commit=False)
-            profile.user = request.user
-            profile.save()
-            return redirect('profile')
-    else:
-        form = ProfileForm(instance=user_profile)
-    
-    return render(request, 'profile.html', {'form': form, 'user_profile': user_profile})
+    # user_profile = Profile.objects.get(user=request.user)
+    return render(request, 'profile.html')
 
 def send_email_to_client():
     print("Sending email to client")

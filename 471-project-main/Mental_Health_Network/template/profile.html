@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-{%load static%}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -87,28 +87,66 @@
 
 <body>
     <header>
-        <h1>Welcome, {{ user.username }}</h1>
+        <h1>Welcome, {{ username }}</h1>
     </header>
 
     <div class="container">
         <section class="profile-section">
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Save Profile</button>
-            </form>
+            <div class="user-avatar">
+                <img src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" alt="">
+                <form class="edit-photo">
+                    <label class="fileContainer">
+                        <input type="file">
+                        Upload Profile Photo
+                    </label>
+                </form>
+            </div>
+            <h2>@{{ username }}</h2>
+            <p>Bio goes here...</p>
+            <div class="button-container">
+                <form action="{% url 'send_email' %}" method="post">
+                    {% csrf_token %}
+                    <button class="button" type="submit">Book Appointment</button>
+                </form>
+                <form action="{% url 'doctor_white_page' %}" method="get">
+                    <button class="button" type="submit">Dr. White</button>
+                </form>
+                <a href="{% url 'blog_writing_page' %}" class="button">Write Blogs</a>
+            </div>
         </section>
 
-        <script>
-            // Redirect to the home page after 3 seconds
-            setTimeout(function() {
-                window.location.href = "{% url 'home' %}";
-            }, 1000);
-        </script>
+        <section>
+            <div class="gap gray-bg">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row" id="page-contents">
+                            <div class="col-lg-3">
+                                <aside class="sidebar static">
+                                    <!-- Sidebar content -->
+                                </aside>
+                            </div>
 
-    
+                            <div class="col-lg-6">
+                                <div class="central-meta">
+                                    <ul class="photos">
+                                        <!-- Photos -->
+                                    </ul>
+                                </div>
+                            </div>
 
-    
+                            <div class="col-lg-3">
+                                <aside class="sidebar static">
+                                    <!-- Sidebar content -->
+                                </aside>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="{% static 'js/main.min.js' %}"></script>
 </body>
 
 </html>

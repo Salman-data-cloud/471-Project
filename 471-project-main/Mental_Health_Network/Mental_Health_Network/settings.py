@@ -45,10 +45,6 @@ INSTALLED_APPS = [
     'Find_Doctor',
     'event_manager',
     'payments',
-    'resources',
-    'policy',
-    'book_appointment',
-    
     
 ]
 
@@ -63,8 +59,6 @@ MIDDLEWARE = [
 ]
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 ROOT_URLCONF = "Mental_Health_Network.urls"
-
-
 
 TEMPLATES = [
     {

@@ -52,8 +52,10 @@ def logout_user(request):
 def register(request):
 
     if request.method == 'POST':
-        
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
         email_address = request.POST.get('email_address')
+        phone_number = request.POST.get('phone_number')
         username = request.POST.get('username')
         password = request.POST.get('password')
 
@@ -65,11 +67,13 @@ def register(request):
         if User.objects.filter(email_address=email_address).exists():
             messages.error(request, 'Email already registered')
             return redirect('/register/')
-        
-        user = UserLoginAuth.objects.create_user(
-                
+        with transaction.atomic():
+            user = UserLoginAuth.objects.create_user(
+                first_name = first_name,
+                last_name = last_name,
                 email_address = email_address,
                 username = username,
+                phone_number = phone_number,
                 password = password
                 
             )

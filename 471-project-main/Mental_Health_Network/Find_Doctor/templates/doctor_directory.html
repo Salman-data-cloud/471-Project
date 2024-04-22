@@ -1,153 +1,54 @@
-{% extends 'base.html' %}
-{% block start %}
+{%extends 'base.html'%}
+{%block start%}
+
+{%block title%}Doctors' Directory{%endblock%}
 
 
-<style>
-    /* Custom styles */
-    body {
-        background-color: #ffffff; /* Light gray background color */
-        font-family: "Arial", sans-serif; /* Change font family if needed */
-        margin: 0; /* Remove default body margin */
-        position: relative; /* Position relative for absolute positioning */
-    }
+<h1>Doctor's Directory</h1>
 
-    .black-banner {
-        background-color: #000;
-        padding: 20px 0;
-        text-align: center;
-    }
+<h2>Psychologists</h2>
+<ul>
+{% for psychologist in psychologists %}
+    <li>{{ psychologist.name }}</li>
+    <ul>
+        <li>Authorized ID: {{ psychologist.authorized_id }}</li>
+        <li>Qualifications: {{ psychologist.qualifications }}</li>
+        <li>Experience: {{ psychologist.experience }} years</li>
+        <li>Consultation Days: {{ psychologist.consultation_days }}</li>
+        <li>Consultation Time: {{ psychologist.consultation_time }}</li>
+        <li>Off Days: {{ psychologist.off_days}}</li>
+        <li>Appointment Fee: {{ psychologist.appointment_fees }} taka</li>
+    </ul>
+{% endfor %}
+</ul>
 
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start; /* Align items to the top */
-        margin-bottom: 20px; /* Add margin at the bottom */
-    }
+<h2>Psychiatrists</h2>
+<ul>
+{% for psychiatrist in psychiatrists %}
+    <li>{{ psychiatrist.name }}</li>
+    <ul>
+        <li>Authorized ID: {{ psychiatrist.authorized_id }}</li>
+        <li>Qualifications: {{ psychiatrist.qualifications }}</li>
+        <li>Experience: {{ psychiatrist.experience }} years</li>
+        <li>Consultation Days: {{ psychiatrist.consultation_days }}</li>
+        <li>Consultation Time: {{ psychiatrist.consultation_time }}</li>
+        <li>Off Days: {{ psychiatrist.off_days}}</li>
+        <li>Appointment Fee: {{ psychiatrist.appointment_fees }} taka</li>
+    </ul>
+{% endfor %}
+</ul>
 
-    .content {
-        text-align: center; /* Center align the content */
-        max-width: 600px; /* Limit the width of the content */
-    }
-
-    .category {
-        margin-top: 20px; /* Add margin between categories */
-    }
-
-    .appointment-button {
-        display: block;
-        padding: 12px 24px;
-        background-color: #5997d0; /* Blue color */
-        color: #000000; /* White text color */
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        text-decoration: none; /* Remove underline */
-    }
-
-    .appointment-button:hover {
-        background-color: #bbd3ed; /* Darker blue color on hover */
-    }
-
-    .highlighted-title {
-        color: #fff; /* White text color */
-    }
-
-    .back-button {
-        position: absolute;
-        top: 20px; /* Adjust top position */
-        right: 20px; /* Adjust right position */
-        padding: 10px 20px;
-        background-color: #080808; /* Gray background color */
-        color: #fff; /* White text color */
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        text-decoration: none; /* Remove underline */
-    }
-
-    .back-button:hover {
-        background-color: #999; /* Darker gray color on hover */
-    }
-</style>
-
-<body>
-    <a href="#" class="back-button">Back</a>
-    <div class="black-banner">
-        <div class="container">
-            <div class="content">
-                <h1 class="highlighted-title">Doctor's Directory</h1>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="category">
-            <h2>Psychologists</h2>
-            {% for psychologist in psychologists %}
-                <div>
-                    <h3>{{ psychologist.name }}</h3>
-                    <ul>
-                        <li>Authorized ID: {{ psychologist.authorized_id }}</li>
-                        <li>Qualifications: {{ psychologist.qualifications }}</li>
-                        <li>Experience: {{ psychologist.experience }} years</li>
-                        <li>Consultation Days: {{ psychologist.consultation_days }}</li>
-                        <li>Consultation Time: {{ psychologist.consultation_time }}</li>
-                        <li>Off Days: {{ psychologist.off_days }}</li>
-                        <li>Appointment Fee: {{ psychologist.appointment_fees }} taka</li>
-                    </ul>
-                    <div class="container">
-                        <a href="/book_appointment" class="appointment-button">Book Appointment</a>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="category">
-            <h2>Psychiatrists</h2>
-            {% for psychiatrist in psychiatrists %}
-                <div>
-                    <h3>{{ psychiatrist.name }}</h3>
-                    <ul>
-                        <li>Authorized ID: {{ psychiatrist.authorized_id }}</li>
-                        <li>Qualifications: {{ psychiatrist.qualifications }}</li>
-                        <li>Experience: {{ psychiatrist.experience }} years</li>
-                        <li>Consultation Days: {{ psychiatrist.consultation_days }}</li>
-                        <li>Consultation Time: {{ psychiatrist.consultation_time }}</li>
-                        <li>Off Days: {{ psychiatrist.off_days }}</li>
-                        <li>Appointment Fee: {{ psychiatrist.appointment_fees }} taka</li>
-                    </ul>
-                    <div class="container">
-                        <a href="/book_appointment" class="appointment-button">Book Appointment</a>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="category">
-            <h2>Emergency Counselors</h2>
-            {% for counselor in counselors %}
-                <div>
-                    <h3>{{ counselor.name }}</h3>
-                    <ul>
-                        <li>Authorized ID: {{ counselor.authorized_id }}</li>
-                        <li>Qualifications: {{ counselor.qualifications }}</li>
-                        <li>Experience: {{ counselor.experience }} years</li>
-                        <li>Consultation Time: {{ counselor.consultation_time }}</li>
-                        <li>Appointment Fee: {{ counselor.appointment_fees }} taka</li>
-                    </ul>
-                    <div class="container">
-                        <a href="/book_appointment" class="appointment-button">Book Appointment</a>
-                
-                    </div>
-                    
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-
-    
-
+<h2>Emergency Counselors</h2>
+<ul>
+{% for counselor in counselors %}
+    <li>{{ counselor.name }}</li>
+    <ul>
+        <li>Authorized ID: {{ counselor.authorized_id }}</li>
+        <li>Qualifications: {{ counselor.qualifications }}</li>
+        <li>Experience: {{ counselor.experience }} years</li>
+        <li>Consultation Time: {{ counselor.consultation_time }}</li>
+        <li>Appointment Fee: {{ counselor.appointment_fees }} taka</li>
+    </ul>
+{% endfor %}
+</ul>
 {% endblock %}
