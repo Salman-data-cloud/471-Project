@@ -9,6 +9,12 @@ from .models import *
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+user = get_user_model
+from django.conf import settings
+
+from book_appointment.views import *
 
 
 
@@ -64,7 +70,12 @@ def process_payment(request):
      
    
     messages.success(request, 'Congratulations! Your payment is successful.')
+    subject = 'Appointment Confirmation'
+    message = render_to_string('email/appointment_confirmation.html', {'appointment': appointment})
+    recipient_list = [user.email]  # Replace user.email with the actual email address
+    send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list) 
     return render(request, 'success_page.html', {'payment_date': payment_date})
+    
 
 def send_otp(mobile_number, otp):
     print(f"Sending OTP {otp} to {mobile_number}")

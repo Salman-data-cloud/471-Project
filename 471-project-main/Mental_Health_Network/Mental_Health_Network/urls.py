@@ -28,6 +28,7 @@ from event_manager.views import join_event
 from payments.views import *
 from resources.views import *
 from book_appointment.views import *
+
 #from . import views
 
 

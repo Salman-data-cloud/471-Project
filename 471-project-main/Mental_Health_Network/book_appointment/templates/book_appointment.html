@@ -1,7 +1,84 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+    /* Custom styles */
+    body {
+        background-color: #fefefe; /* Light gray background color */
+        font-family: "Arial", sans-serif; /* Change font family if needed */
+        margin: 0; /* Remove default body margin */
+    }
+
+    h1 {
+        text-align: center; /* Center align the heading */
+        margin-top: 150px; /* Add margin at the top */
+    }
+
+    form {
+        max-width: 550px; /* Limit the width of the form */
+        margin: 0 auto; /* Center align the form */
+        padding: 20px; /* Add padding */
+        border-radius: 8px; /* Add border radius */
+        background-color: #fff; /* White background color */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow */
+    }
+
+    label {
+        display: block; /* Display labels as blocks */
+        margin-bottom: 10px; /* Add margin at the bottom */
+    }
+
+    input[type="date"],
+    input[type="time"],
+    button {
+        width: 100%; /* Make inputs and button full width */
+        padding: 12px; /* Add padding */
+        margin-bottom: 20px; /* Add margin at the bottom */
+        border: 1px solid #b0aeae; /* Add border */
+        border-radius: 4px; /* Add border radius */
+        box-sizing: border-box; /* Include padding in width calculation */
+        font-size: 16px; /* Set font size */
+    }
+
+    button {
+        background-color: #436b95; /* Blue button color */
+        color: #fff; /* White text color */
+        cursor: pointer; /* Add cursor pointer */
+        transition: background-color 0.3s; /* Add transition effect */
+    }
+
+    button:hover {
+        background-color: #9eb9d6; /* Darker blue color on hover */
+    }
+
+    .error-message {
+        color: #ff0000; /* Red text color for error message */
+        text-align: center; /* Center align the error message */
+        margin-top: 20px; /* Add margin at the top */
+    }
+
+    .back-button {
+        position: fixed; /* Fixed position */
+        top: 20px; /* Distance from the top */
+        right: 20px; /* Distance from the right */
+        background-color: #121212; /* Blue button color */
+        color: #fff; /* White text color */
+        padding: 10px 20px; /* Padding */
+        border: none; /* No border */
+        border-radius: 4px; /* Border radius */
+        cursor: pointer; /* Cursor pointer */
+        transition: background-color 0.3s; /* Transition effect */
+        text-decoration: none; /* Remove underline */
+    }
+
+    .back-button:hover {
+        background-color: #fafbfd; /* Darker blue color on hover */
+    }
+</style>
+
 <h1>Book Appointment</h1>
+<a href="#" class="back-button">Back</a> <!-- Back button -->
+
 <form method="POST" id="appointment_form">
     {% csrf_token %}
     
@@ -12,7 +89,7 @@
     <button type="submit">Book Appointment</button>
 </form>
 {% if error_message %}
-    <p>{{ error_message }}</p>
+    <p class="error-message">{{ error_message }}</p>
 {% endif %}
 
 <script>
@@ -42,4 +119,4 @@
         });
     });
 </script>
-{%endblock%}
+{% endblock %}
