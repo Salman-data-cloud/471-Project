@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from Login_Authentication.views import *
 from Support_Group.views import *
-from user_profile.views import *
+from user_profile.views import  create_profile, profile_detail
 from django.conf import settings
 from django.conf.urls.static import static
 from Find_Doctor.views import *
@@ -31,6 +31,9 @@ from book_appointment.views import *
 from EmergencySupport.views import *
 from discussion_group.views import *
 from events.views import upcoming_events, seminars, workshops
+from feedback.views import *
+from chatbot.views import *
+from policy.views import *
 #from . import views
 
 
@@ -38,10 +41,11 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('login/', login_page, name= 'login_page'),
     path('register/', register, name= 'register'),
-    path('logout/', logout_user, name = 'logout_user'),
+    path('logout/', logout_user, name='logout'),
     path('forgot_pass/',forgot_password, name='forgot_password'),
     path('home/', home, name = 'home'),
-    path('profile/', include('user_profile.urls')),
+    path('create_profile/', create_profile, name = 'create_profile'),
+    path('profile_detail/', profile_detail, name = 'profile_detail'),
     path('support_app/', support_app , name = 'support_app'),
     path('support_detail/<int:group_id>/', support_detail, name = 'support_detail'),
     path('user_greeting/', user_greeting, name = 'user_greeting'),
@@ -59,15 +63,19 @@ urlpatterns = [
     path('resources/', resources, name = 'resources'),
     path('book_appointment/', book_appointment, name = 'book_appointment'),
     path('emergencysupport/', EmergencySupport, name = 'emergencysupport'),
-    path('discussion_group/', show_group, name = 'discussion_group'),
+    path('discussion-group/', show_group, name = 'show_group'),
     path('books/', books_page, name='books'),
     path('podcasts/', podcasts_page, name='podcasts'),
     path('articles/', articles_page, name='articles'),
     path('upcoming-events/', upcoming_events, name='upcoming_events'),
     path('seminars/', seminars, name='seminars'),
     path('workshops/', workshops, name='workshops'),
+    path('feedback/', feedback_view, name='feedback'),
+    path('success/<int:feedback_id>/', feedback_success, name='feedback_success'),
+    path('chatbot/', include('chatbot.urls')),
+    path('policy/', policy, name = 'policy') ]
 
-]
+
 
 urlpatterns = urlpatterns+static(settings.MEDIA_URL,
                                  document_root=settings.MEDIA_ROOT)

@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     'EmergencySupport',
     'discussion_group',
     'events',
+    'feedback', 
+    'chatbot',
+    'policy'
     
 ]
 
@@ -68,7 +71,7 @@ ROOT_URLCONF = "Mental_Health_Network.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'template')],
+        "DIRS": [os.path.join(BASE_DIR, 'templates')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

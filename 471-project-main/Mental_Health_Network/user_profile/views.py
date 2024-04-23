@@ -4,10 +4,40 @@ from .models import Profile
 from django.core.mail import send_mail
 from django.conf import settings
 from django.shortcuts import redirect
-# Create your views here.
-def profile(request):
-    # user_profile = Profile.objects.get(user=request.user)
-    return render(request, 'profile.html')
+from .forms import ProfileForm
+from django.contrib.auth.models import User
+
+
+
+def create_profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return redirect('profile_detail')  
+    else:
+        form = ProfileForm()
+    return render(request, 'create_profile.html', {'form': form})
+
+def profile_detail(request):
+    profile = Profile.objects.get(user=request.user)
+    return render(request, 'profile_detail.html', {'profile': profile})
+
+#def update_profile(request):
+    #try:
+        #profile = Profile.objects.get(user=request.user)
+    #except ObjectDoesNotExist:
+        #return redirect('create_profile')
+    #if request.method == 'POST':
+        #form = ProfileForm(request.POST, request.FILES, instance=profile)
+        #if form.is_valid():
+            #form.save()
+            #return redirect('profile_detail')  # Redirect to profile detail page
+    #else:
+        #form = ProfileForm(instance=profile)
+    #return render(request, 'update_profile.html', {'form': form})
 
 def send_email_to_client():
     print("Sending email to client")
@@ -23,7 +53,4 @@ def send_email_view(request):
     return JsonResponse({'message': 'Method not allowed'}, status=405)
 def email_sent_view(request):
     return render(request, 'email_sent.html')
-def doctor_white_view(request):
-    return render(request, 'doctor_white.html')
-def blog_writing_view(request):
-    return render(request, 'blogs.html')
+

@@ -1,33 +1,124 @@
-{% extends 'base.html' %}
-{%block start%}
-{% block title %}
-    Upcoming Events - My Website
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Events - My Website</title>
+    <style>
+        /* Custom styles */
+        body {
+            padding-top: 0;
+            background-color: #f1f4f7;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
 
+        /* Banner styles */
+        .banner {
+            background-color: #26703d;
+            color: #fff;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 80px;
+        }
 
+        /* Back button styles */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #fcfbfb;
+            color: #040404;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
 
-{% block events %}
-    <h2>Upcoming Events</h2>
-    {% if events %}
-        <ul>
-            {% for event in events %}
-                <li>
-                    <h3>{{ event.event_name }}</h3>
-                    <p>Date: {{ event.event_date }}</p>
-                    <p>Venue: {{ event.venue }}</p>
-                    <p>Details: {{ event.event_details }}</p>
-                    <form action = "{%url 'join_event'%}" method = 'post'>
-                        {%csrf_token%}
-                        <input type="hidden" name="event_id" value="{{ event.id }}">
-                        <button type = 'submit'>Join Event</button>
-                    </form>
-                </li>
-            {% endfor %}
-            
-        </ul>
-    {% else %}
-        <p>No upcoming events at the moment.</p>
-    {% endif %}
-{% endblock %}
+        /* Back button hover effect */
+        .back-button:hover {
+            background-color: #7a7171;
+        }
 
-{%endblock%}
+        /* Container styles */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Event list styles */
+        .event-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .event-list li {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f1f4f2;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-list li h3 {
+            margin-top: 0;
+        }
+
+        .event-list li p {
+            margin: 5px 0;
+        }
+
+        .event-list li form {
+            margin-top: 10px;
+        }
+
+        .event-list li form button {
+            padding: 10px 20px;
+            background-color: #5d7952;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .event-list li form button:hover {
+            background-color: #6ea090;
+        }
+    </style>
+</head>
+<body>
+    <!-- Banner -->
+    <div class="banner">
+        <h1>Upcoming Events</h1>
+    </div>
+
+    <!-- Back button -->
+    <a href="#" class="back-button" onclick="window.history.back()">Back</a>
+
+    <!-- Events -->
+    <div class="container">
+        <h2>Upcoming Events</h2>
+        {% if events %}
+            <ul class="event-list">
+                {% for event in events %}
+                    <li>
+                        <h3>{{ event.event_name }}</h3>
+                        <p>Date: {{ event.event_date }}</p>
+                        <p>Venue: {{ event.venue }}</p>
+                        <p>Details: {{ event.event_details }}</p>
+                        <form action="{% url 'join_event' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="event_id" value="{{ event.id }}">
+                            <button type="submit">Join Event</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No upcoming events at the moment.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

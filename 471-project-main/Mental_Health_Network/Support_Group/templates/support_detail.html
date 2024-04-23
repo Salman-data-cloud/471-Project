@@ -1,23 +1,82 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Messages</title>
+    <!-- Linking Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Linking Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-PbQN5xL+8+Qjnp/6Gh6uudPnTUZb4IqKlY2yXMga97tcT7tInJP2oAn2OyiXbyJnpG4sVgCr/X/gEcdNsmfGvg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Custom styles */
+        body {
+            padding-top: 0;
+            background-color: #f1f4f7; /* Match the background color */
+        }
 
-{% block content %}
-  <h1>{{ group.name }}</h1>
-  <h2>Messages</h2>
-  <ul>
-    {% for message in messages %}
-      <li>{{ message.message }}</li>
-      <p>Time: {{ message.time }}</p>  <!-- Displaying the time of sending -->
-      <p>Sender: {{ message.user.username }}</p>  <!-- Displaying the sender's username -->
-      <hr>
-    {% empty %}
-      <p>No messages yet.</p>
-    {% endfor %}
-  </ul>
-  
-  <form method="post" action="{% url 'send_message' group_id=group_id %}">
-    {% csrf_token %}
-    <textarea name="message" rows="4" cols="50"></textarea><br>
-    <input type="submit" value="Send">
-  </form>
-{% endblock %}
+        /* Banner styles */
+        h1 {
+            background-color: #0d0d0d; /* Match the banner background color */
+            color: #fff; /* Match the banner text color */
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Support group styles */
+        .support-group {
+            border: 2px solid #354f6b; /* Match the border color */
+            border-radius: 5px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 500px; /* Match the width */
+            margin: 0 auto 20px auto; /* Center horizontally with bottom margin */
+        }
+
+        .support-group:hover {
+            background-color: #9eb3ca; /* Match the hover background color */
+            color: #fff; /* Match the hover text color */
+        }
+
+        /* Center message box */
+        .message-box {
+            margin: 0 auto; /* Center horizontally */
+            width: 500px; /* Match the width of support groups */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Banner -->
+        <h1>{{ group.name }}</h1>
+
+        <!-- Messages -->
+        <h2>Messages</h2>
+        <ul>
+            {% for message in messages %}
+                <li>
+                    <p>{{ message.message }}</p>
+                    <p>Time: {{ message.time }}</p>
+                    <p>Sender: {{ message.user.username }}</p>
+                </li>
+                <hr>
+            {% empty %}
+                <p>No messages yet.</p>
+            {% endfor %}
+        </ul>
+     
+        <!-- Message form -->
+        <form class="message-box" method="post" action="{% url 'send_message' group_id=group_id %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <textarea class="form-control" name="message" rows="4" placeholder="Type your message here"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+    </div>
+</body>
+</html>
+
 

@@ -9,4 +9,4 @@ from discussion_group.templates import *
 
 
 def show_group(request):
-    return render(request, "index.html")
+    return render(request, "discussion_group.html")
