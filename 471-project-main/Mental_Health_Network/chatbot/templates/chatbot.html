@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mental Health Support Chat</title>
+    <link rel="stylesheet" href="{% static 'css/chatbot.css' %}">
+</head>
+<body>
+<div class="chat-container">
+    <div id="chat-box"></div>
+    <input type="text" id="user-input" placeholder="Hi, It's Mini! Type your message..." autocomplete="off"/>
+    <button onclick="sendMessage()">Send</button>
+</div>
+<script src="{% static 'javascript/chatbot.js' %}"></script>
+</body>
+</html>
