@@ -1,203 +1,176 @@
 {% extends 'base.html' %}
 
-
-
 {% block content %}
-<div class="container">
-    <div class="screen">
-		<div class="screen__content">
-            
-            <form method="post" enctype="multipart/form-data" action="{% url 'login_page' %}" class="needs-validation" novalidate>
-                {% csrf_token %}
-                {% if messages %}
-                    <div class="alert alert-info" role="alert">
-                        {% for message in messages %}
-                            {{ message }}
-                        {% endfor %}
-                    </div>
-                {% endif %}
-                <div class="login__field">
-					<i class="login__icon fas fa-user"></i>
-					<input type="text" class="login__input" placeholder="username" name = 'username'>
-				</div>
-				<div class="login__field">
-					<i class="login__icon fas fa-lock"></i>
-					<input type="password" class="login__input" placeholder="password" name = 'password'>
-				</div>
-                
-                <p>Forgot Password? <a href='/forgot_pass/'>Click Here</a><br>
-                
-                <br>Don't have an account? <a href='/register/'>Register</a></p>
-                
-                <button class="button login__submit">
-					<span class="button__text">Log In Now</span>
-					<i class="button__icon fas fa-chevron-right"></i>
-				</button>				
-			</form>
-        </div>
-    </div>
-</div>
-{% endblock %}
-
-{% block start %}
 <style>
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+    /* Custom styles */
+    :root {
+        --background: #1a1a2e;
+        --color: #ffffff;
+        --primary-color: #0f3460;
+    }
 
-* {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;	
-	font-family: Raleway, sans-serif;
-}
+    * {
+        box-sizing: border-box;
+    }
 
-body {
-	background: linear-gradient(90deg, #C7C5F4, #776BCC);		
-}
+    html {
+        scroll-behavior: smooth;
+    }
 
-.container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-height: 100vh;
-}
+    body {
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "poppins";
+        background: var(--background);
+        color: var(--color);
+        letter-spacing: 1px;
+        transition: background 0.2s ease;
+        -webkit-transition: background 0.2s ease;
+        -moz-transition: background 0.2s ease;
+        -ms-transition: background 0.2s ease;
+        -o-transition: background 0.2s ease;
+    }
 
-.screen {		
-	background: linear-gradient(90deg, #5D54A4, #7C78B8);		
-	position: relative;	
-	height: 600px;
-	width: 360px;	
-	box-shadow: 0px 0px 24px #5C5696;
-}
+    a {
+        text-decoration: none;
+        color: var(--color);
+    }
 
-.screen__content {
-	z-index: 1;
-	position: relative;	
-	height: 100%;
-}
+    h1 {
+        font-size: 2.5rem;
+    }
 
-.screen__background {		
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 0;
-	-webkit-clip-path: inset(0 0 0 0);
-	clip-path: inset(0 0 0 0);	
-}
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
 
-.screen__background__shape {
-	transform: rotate(45deg);
-	position: absolute;
-}
+    .login-container {
+        position: relative;
+        width: 22.2rem;
+    }
 
-.screen__background__shape1 {
-	height: 520px;
-	width: 520px;
-	background: #FFF;	
-	top: -50px;
-	right: 120px;	
-	border-radius: 0 72px 0 0;
-}
+    .form-container {
+        border: 1px solid hsla(0, 0%, 65%, 0.158);
+        box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        backdrop-filter: blur(20px);
+        z-index: 99;
+        padding: 2rem;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+    }
 
-.screen__background__shape2 {
-	height: 220px;
-	width: 220px;
-	background: #101010;	
-	top: -172px;
-	right: 0;	
-	border-radius: 32px;
-}
+    .login-container form input {
+        display: block;
+        padding: 14.5px;
+        width: 100%;
+        margin: 2rem 0;
+        color: var(--color);
+        outline: none;
+        background-color: #9191911f;
+        border: none;
+        border-radius: 5px;
+        font-weight: 500;
+        letter-spacing: 0.8px;
+        font-size: 15px;
+        backdrop-filter: blur(15px);
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -o-border-radius: 5px;
+    }
 
-.screen__background__shape3 {
-	height: 540px;
-	width: 190px;
-	background: linear-gradient(270deg, #090909, #070707);
-	top: -24px;
-	right: 0;	
-	border-radius: 32px;
-}
+    .login-container form input:focus {
+        box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.2);
+        animation: wobble 0.3s ease-in;
+        -webkit-animation: wobble 0.3s ease-in;
+    }
 
-.screen__background__shape4 {
-	height: 400px;
-	width: 200px;
-	background: #7a77ae;	
-	top: 420px;
-	right: 50px;	
-	border-radius: 60px;
-}
+    .login-container form button {
+        background-color: var(--primary-color);
+        color: var(--color);
+        display: block;
+        padding: 13px;
+        border-radius: 5px;
+        outline: none;
+        font-size: 18px;
+        letter-spacing: 1.5px;
+        font-weight: bold;
+        width: 100%;
+        cursor: pointer;
+        margin-bottom: 2rem;
+        transition: all 0.1s ease-in-out;
+        border: none;
+    }
 
-.login {
-	width: 320px;
-	padding: 30px;
-	padding-top: 156px;
-}
+    .login-container form button:hover {
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
+        transform: scale(1.02);
+    }
 
-.login__field {
-	padding: 20px 0px;	
-	position: relative;	
-}
+    .circle {
+        width: 8rem;
+        height: 8rem;
+        background: var(--primary-color);
+        border-radius: 50%;
+        position: absolute;
+    }
 
-.login__icon {
-	position: absolute;
-	top: 30px;
-	color: #010101;
-}
+    .circle-one {
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transform: translate(-45%, -45%);
+    }
 
-.login__input {
-	border: none;
-	border-bottom: 2px solid #010101;
-	background: none;
-	padding: 10px;
-	padding-left: 24px;
-	font-weight: 700;
-	width: 75%;
-	transition: .2s;
-    color: rgb(3, 3, 3);
-}
+    .circle-two {
+        bottom: 0;
+        right: 0;
+        z-index: -1;
+        transform: translate(45%, 45%);
+    }
 
-.login__input:active,
-.login__input:focus,
-.login__input:hover {
-	outline: none;
-	border-bottom-color: #6A679E;
-}
+    .register-forget {
+        margin-top: 1rem; /* Added margin-top to create space */
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap; /* Allow items to wrap onto a new line */
+    }
 
-.login__submit {
-	background: #e8d2f6;
-	font-size: 14px;
-	margin-top: 30px;
-	padding: 16px 20px;
-	border-radius: 26px;
-	border: 1px solid #D4D3E8;
-	text-transform: uppercase;
-	font-weight: 700;
-	display: flex;
-	align-items: center;
-	width: 100%;
-	color: #4C489D;
-	box-shadow: 0px 2px 2px #5C5696;
-	cursor: pointer;
-	transition: .2s;
-}
-
-.login__submit:active,
-.login__submit:focus,
-.login__submit:hover {
-	border-color: #040404;
-	outline: none;
-}
-
-.button__icon {
-	font-size: 24px;
-	margin-left: auto;
-	color: #7875B5;
-}
-
-
-  
+    .opacity {
+        opacity: 0.6;
+    }
 </style>
+
+<!-- Pills content -->
+<section class="container">
+    <div class="login-container">
+        <div class="circle circle-one"></div>
+        <div class="form-container">
+            <h1 class="opacity">LOGIN</h1>
+            <form>
+                <input type="text" placeholder="USERNAME" />
+                <input type="password" placeholder="PASSWORD" />
+                <button class="opacity">SUBMIT</button>
+            </form>
+            <div class="register-forget opacity">
+                <span>New here? <a href="{% url 'register' %}">Sign up</a></span> <!-- Wrapped "New here?" in a span -->
+                <div> <!-- Added div wrapper for "Forgot password?" -->
+                    <a href="{%url 'forgot_password'%}">Forgot password?</a>
+                </div>
+            </div>
+        </div>
+        <div class="circle circle-two"></div>
+    </div>
+    <div class="theme-btn-container"></div>
+</section>
 {% endblock %}
+
 
 
 

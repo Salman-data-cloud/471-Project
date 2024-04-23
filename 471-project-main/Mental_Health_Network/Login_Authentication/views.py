@@ -15,6 +15,7 @@ from django.db import transaction
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+
 @login_required(login_url='/login/')
 
 def home(request):
@@ -52,6 +53,7 @@ def logout_user(request):
 def register(request):
 
     if request.method == 'POST':
+        
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         email_address = request.POST.get('email_address')
