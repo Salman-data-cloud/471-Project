@@ -72,7 +72,8 @@
 </style>
 
 <body>
-    <a href="#" class="back-button">Back</a>
+    <div class="back-container">
+        <a href="{% url 'home' %}" class="back-button">Back</a>
     <div class="black-banner">
         <div class="container">
             <div class="content">
@@ -96,6 +97,9 @@
                         <li>Off Days: {{ psychologist.off_days }}</li>
                         <li>Appointment Fee: {{ psychologist.appointment_fees }} taka</li>
                     </ul>
+                    <div class="container">
+                        <a href="/book_appointment" class="appointment-button">Book Appointment</a>
+                    </div>
                 </div>
             {% endfor %}
         </div>
@@ -116,6 +120,9 @@
                         <li>Off Days: {{ psychiatrist.off_days }}</li>
                         <li>Appointment Fee: {{ psychiatrist.appointment_fees }} taka</li>
                     </ul>
+                    <div class="container">
+                        <a href="/book_appointment" class="appointment-button">Book Appointment</a>
+                    </div>
                 </div>
             {% endfor %}
         </div>
@@ -133,14 +140,16 @@
                         <li>Experience: {{ counselor.experience }} years</li>
                         <li>Consultation Time: {{ counselor.consultation_time }}</li>
                         <li>Appointment Fee: {{ counselor.appointment_fees }} taka</li>
+
                     </ul>
+                    <div class="container">
+                        <a href="/book_appointment" class="appointment-button">Book Appointment</a>
+                    </div>
                 </div>
             {% endfor %}
         </div>
     </div>
 
-    <div class="container">
-        <a href="/book_appointment" class="appointment-button">Book Appointment</a>
-    </div>
+    
 
 {% endblock %}
