@@ -45,6 +45,11 @@ INSTALLED_APPS = [
     'Find_Doctor',
     'event_manager',
     'payments',
+    'resources',
+    'book_appointment',
+    'EmergencySupport',
+    'discussion_group',
+    'events',
     
 ]
 

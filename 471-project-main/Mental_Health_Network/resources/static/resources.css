@@ -1,0 +1,67 @@
+/* Style for the test page */
+body {
+  background-color: #f9f4f4;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('resorces.jpg');
+  }
+  
+  /* Style for the buttons */
+  
+  button {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 2px solid #b7d3f4;
+  background-color: #b7d3f4;
+  color: #2e435d;
+  cursor: pointer;
+  }
+  
+  button:hover {
+  background-color: #4a74a7;
+  color: #63c3ec;
+  }
+  /* Style for the back button */
+  .back-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #0f0e0f;
+  color: #fff;
+  cursor: pointer;
+  }
+  /* Style for the buttons container */
+  .button-container {
+  text-align: center;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

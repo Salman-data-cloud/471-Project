@@ -4,13 +4,136 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emergency Support Page</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'support.css' %}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0; /* Light background color */
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: #f0f0f0; /* Light background color */
+        }
+        
+        .top-nav {
+            display: flex;
+            position: sticky;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 10;
+            padding: 2rem 8rem; /* Increase padding to make it wider */
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background-color: #da0a0a;
+            box-shadow: 0 10px 15px -3px rgba(192, 73, 73, 0.769), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .exit-btn-container {
+            position: relative;
+        }
+        
+        .exit-btn {
+            padding: 0.25rem 1rem;
+            border-radius: 0.75rem;
+            color: #ffffff;
+            background-color: #dc2626;
+            cursor: pointer; /* Add cursor pointer */
+            position: absolute; /* Position absolute */
+            top: 1.5rem; /* Adjust top position */
+            right: 2rem; /* Adjust right position */
+        }
+        
+        .main-div {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 1.25rem 5rem;
+            margin-top: 1.25rem;
+            width: 100%;
+            background-color: #97a0ad;
+        }
+        
+        .heading {
+            font-size: 1.5rem;
+            line-height: 2rem;
+            font-weight: 700;
+            color: #ffffff; /* Text color for heading */
+        }
+        
+        .grid {
+            display: flex;
+            flex-direction: column; /* Change to column */
+            gap: 1.25rem;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .card {
+            padding: 1rem;
+            border-radius: 0.375rem;
+            width: calc(100% - 2rem);
+            max-width: 500px;
+            background-color: #c9efef;
+            box-shadow: 0 4px 3px rgba(210, 105, 105, 0.07), 0 2px 2px rgba(0, 0, 0, 0.06);
+        }
+        
+        .card-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chip {
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.125rem;
+            color: #6b7280;
+            background-color: #f3f4f6;
+        }
+        
+        .time-container {
+            display: flex;
+            margin-left: 0.5rem;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        
+        .open-time {
+            display: flex;
+            flex-direction: row; /* Display the phone icon and button in a row */
+            align-items: center; /* Align items vertically */
+        }
+        
+        .open-time button {
+            margin-left: 0.5rem; /* Add some space between the phone icon and the button */
+        }
+        
+        .call {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: fit-content;
+            margin-top: 1rem; 
+            margin-left:0.5rem;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <div class="top-nav">
-            <button class="exit-btn">Exit</button>
+            <div class="exit-btn-container">
+                <!-- Exit button -->
+                <button class="exit-btn" onclick="window.close()">Exit</button>
+                <!-- Red button -->
+                <button class="exit-btn" style="background-color: #da0a0a;">Red Button</button>
+            </div>
         </div>
         <div class="main-div">
             <h2 class="heading">Emergency Support Resources</h2>

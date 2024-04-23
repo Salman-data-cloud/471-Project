@@ -1,11 +1,17 @@
+
 from django.shortcuts import render
-
-# Create your views here.
-
 from .models import Book, Article,Podcast
 
+
 def resources(request):
+    return render(request, 'resources.html')
+
+def books_page(request):
     books = Book.objects.all()
-    articles = Article.objects.all()
+    return render(request, 'books.html', {'books': books})
+def podcasts_page(request):
     podcasts = Podcast.objects.all()
-    return render(request, 'resources.html', {'books': books, 'articles': articles, 'podcasts': podcasts})
+    return render(request, 'podcasts.html', {'podcasts': podcasts})
+def articles_page(request):
+    articles = Article.objects.all()
+    return render(request, 'articles.html', {'articles': articles})

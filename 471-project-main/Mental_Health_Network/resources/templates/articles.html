@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Articles</title>
+<style>
+body {
+font-family: sans-serif;
+margin: 0;
+padding: 0;
+background-color: #ededf8; /* Background color for Articles page */
+}
+.main {
+padding:3rem;
+display: grid;
+gap: 3rem;
+}
+.section {
+margin-top: 2rem;
+margin-bottom: 2rem;
+}
+.title {
+font-size: 2.25rem;
+font-weight: bold;
+}
+.grid {
+display: grid;
+gap: 6rem;
+}
+.col {
+border: 3px solid #accbf4;
+border-radius: 0.375rem;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+overflow: hidden;
+background-color: #ffffff; /* Background color for each card */
+}
+.col:hover {
+
+box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Change box shadow on hover */
+}
+.img-container {
+width: 100%;
+overflow: hidden;
+max-height: 200px; /* Adjust max-height for the article image */
+}
+.img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+.content {
+padding: 1rem;
+}
+.author {
+font-size: 0.875rem;
+color: #4a5568;
+}
+.heading {
+font-size: 1.125rem;
+font-weight: bold;
+}
+.paragraph {
+margin-top: 0.75rem;
+margin-bottom: 0.75rem;
+}
+.read-more {
+width: 100%;
+text-align: right;
+text-decoration: underline;
+text-decoration-color: transparent;
+text-decoration-skip-ink: auto;
+}
+.read-more:hover {
+text-decoration-color: #4299e1;
+
+}
+/* Media Queries */
+@media screen and (min-width: 500px) {
+.grid {
+grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+}
+@media screen and (min-width: 500px) {
+.grid {
+grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+}
+/* Add this CSS to adjust the size of the article images */
+.img {
+width: 100%;
+max-height: 300px; /* Adjust the max-height as needed */
+object-fit: cover;
+}
+/* the navigation bar */
+.navbar {
+display: flex;
+align-items: center;
+justify-content: space-between;
+background-color: black;
+color: white;
+padding: 10px 20px;
+}
+/* Add this CSS for the back button */
+.back-button {
+padding: 10px 20px;
+font-size: 16px;
+border: none;
+background-color: #f7f5f5;
+color: #0f0f0f; /* White text color */
+cursor: pointer;
+text-decoration: none; /* Remove underline */
+}
+.back-button:hover {
+
+background-color: #2bacfb;
+}
+</style>
+</head>
+<body class="articles">
+<div class="navbar">
+<h1 class="title">Articles</h1>
+<div class="back-container">
+<a href="{% url 'resources' %}" class="back-button">Back</a>
+</div>
+</div>
+<div class="grid">
+{% for article in articles %}
+<div class="col">
+<div class="img-container">
+<img src="{{ MEDIA_URL }}{{ article.image.url }}" class="img" alt="Article Image" />
+</div>
+<div class="content">
+<h3 class="author">{{ article.author }}</h3>
+<h2 class="heading">{{ article.title }}</h2>
+<p class="paragraph">{{ article.description }}</p>
+<div class="read-more">
+<a href="{{ article.url }}" target="_blank">Read Article</a>
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+</body>
+</html>

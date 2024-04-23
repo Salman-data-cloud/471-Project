@@ -1,77 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resources</title>
-    {% load static%}
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'resources.css' %}">
 </head>
 <body>
-    <div class="main">
-        <div class="section">
-            <h1 class="title">Books</h1>
-            <div class="grid">
-                {% for book in books %}
-                <div class="col">
-                    <div class="img-container">
-                        <img src="{{ MEDIA_URL }}{{ book.image.url }}" class="img" alt="Book Cover" />
-                    </div>
-                    <div class="content">
-                        <h3 class="author">{{ book.author }}</h3>
-                        <h2 class="heading">{{ book.title }}</h2>
-                        <p class="paragraph">{{ book.description }}</p>
-                        <div class="GoodReads Review">
-                            <a href="{{ book.url }}" target="_blank">GoodReads Review</a>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
+    <a href="#" class="back-button">Back</a>
+<div>
+<a href="{% url 'books' %}"><button>Books</button></a>
+<a href="{% url 'podcasts' %}"><button>Podcasts</button></a>
+<a href="{% url 'articles' %}"><button>Articles</button></a>
+</div>
 
-        <div class="section">
-            <h1 class="title">Articles</h1>
-            <div class="grid">
-                {% for article in articles %}
-                <div class="col">
-                    <div class="img-container">
-                        <img src="{{ MEDIA_URL }}{{ article.image.url }}" class="img" alt="Article Image" />
-                    </div>
-                    <div class="content">
-                        <h3 class="author">{{ article.author }}</h3>
-                        <h2 class="heading">{{ article.title }}</h2>
-                        <p class="paragraph">{{ article.description }}</p>
-                        <div class="read-more">
-                            <a href="{{ article.url }}" target="_blank">Read Article</a>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <div class="section">
-            <h1 class="title">Podcasts</h1>
-            <div class="grid">
-                {% for podcast in podcasts %}
-                <div class="col">
-                    <div class="img-container">
-                        <img src="{{ MEDIA_URL }}{{ podcast.image.url }}" class="img" alt="Podcast Image" />
-                    </div>
-                    <div class="content">
-                        <h3 class="author">{{ podcast.host }}</h3>
-                        <h2 class="heading">{{ podcast.title }}</h2>
-                        <p class="paragraph">{{ podcast.description }}</p>
-                        <div class="listen-more">
-                            <a href="{{ podcast.url }}" target="_blank">Listen Now</a>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
 </body>
 </html>

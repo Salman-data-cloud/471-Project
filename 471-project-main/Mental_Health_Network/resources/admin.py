@@ -3,4 +3,4 @@ from django.contrib import admin
 # Register your models here.
 from .models import *
 
-admin.site.register([Book, Article, Podcast]) 
+admin.site.register([Author, Book, Article, Podcast]) 

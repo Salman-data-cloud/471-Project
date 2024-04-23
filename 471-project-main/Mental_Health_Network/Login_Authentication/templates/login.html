@@ -153,9 +153,10 @@
         <div class="circle circle-one"></div>
         <div class="form-container">
             <h1 class="opacity">LOGIN</h1>
-            <form>
-                <input type="text" placeholder="USERNAME" />
-                <input type="password" placeholder="PASSWORD" />
+            <form action="{% url 'login_page' %}" method="post"> <!-- Added action attribute -->
+                {% csrf_token %}
+                <input type="text" placeholder="USERNAME" name="username" /> <!-- Added name attribute -->
+                <input type="password" placeholder="PASSWORD" name="password" /> <!-- Added name attribute -->
                 <button class="opacity">SUBMIT</button>
             </form>
             <div class="register-forget opacity">

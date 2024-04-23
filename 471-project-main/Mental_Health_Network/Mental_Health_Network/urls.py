@@ -26,6 +26,11 @@ from event_manager.views import *
 from Support_Group.views import reply_message
 from event_manager.views import join_event
 from payments.views import *
+from resources.views import *
+from book_appointment.views import *
+from EmergencySupport.views import *
+from discussion_group.views import *
+from events.views import upcoming_events, seminars, workshops
 #from . import views
 
 
@@ -51,6 +56,17 @@ urlpatterns = [
     path('otp-verification/', otp_verification, name='otp_verification'),
     path('success_page/', process_payment, name = 'success_page'),
     path('generate_invoice/', generate_invoice, name= 'generate_invoice'),
+    path('resources/', resources, name = 'resources'),
+    path('book_appointment/', book_appointment, name = 'book_appointment'),
+    path('emergencysupport/', EmergencySupport, name = 'emergencysupport'),
+    path('discussion_group/', show_group, name = 'discussion_group'),
+    path('books/', books_page, name='books'),
+    path('podcasts/', podcasts_page, name='podcasts'),
+    path('articles/', articles_page, name='articles'),
+    path('upcoming-events/', upcoming_events, name='upcoming_events'),
+    path('seminars/', seminars, name='seminars'),
+    path('workshops/', workshops, name='workshops'),
+
 ]
 
 urlpatterns = urlpatterns+static(settings.MEDIA_URL,
